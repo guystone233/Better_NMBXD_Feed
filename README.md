@@ -11,3 +11,4 @@ pip install -r requirements.txt
 python nmbxd.py
 ```
 4. 根据提示选择板块，输入页数，等待下载完成
+5. 可能需要获取cookie并写入userhash变量
