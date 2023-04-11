@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NMBXD</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* 样式表，可根据需要自定义 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        main {
+            margin: 20px auto;
+            padding: 10px;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        .post {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            /* 添加手型光标 */
+            display: flex;
+        }
+
+        .post img {
+            max-width: 200px;
+            height: auto;
+            margin-right: 20px;
+            object-fit: contain;
+        }
+
+        .post h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .post p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .post .meta {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .post .meta span {
+            margin-right: 10px;
+        }
+        
+        .post .post-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+        
+        .post .title-date {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+    </style>
+    <script>
+        /* JavaScript代码，用于实现页面跳转 */
+        function goToWebsite(parameter) {
+            window.open("{{post_prefix}}" + parameter, "_blank");
+        }
+    </script>
+</head>
+<body>
+<header>
+    <h1>NMBXD</h1>
+</header>
+<main>
+    {% for article in articles %}
+    <article class="post" onclick="goToWebsite('{{article.id}}')">
+        {% if article.imgUrl %}
+        <img src="{{article.imgUrl}}" alt="图片">
+        {% endif %}
+        <div class="post-content">
+            <div class="title-date">
+                <h2>{{article.title}}</h2>
+                <div class="meta"> <span>{{article.time}}</span> </div>
+            </div>
+            <p>{{article.content}}</p>
+        </div>
+    </article>
+    {% endfor %}
+    
+</main>
+</body>
+</html>
