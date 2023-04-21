@@ -42,6 +42,7 @@ def fetchContent(forum_id, results, page):
         print(f"Error fetching content for forum id {forum_id}: {e}")
 
 
+print('获取论坛列表...')
 forumList = getForumList()
 threads = []
 results = {}
