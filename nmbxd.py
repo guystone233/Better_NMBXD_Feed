@@ -19,6 +19,7 @@ currentFileDir = os.path.dirname(__file__)
 htmlTemplate = open(currentFileDir + '/template.html',
                     'r', encoding='utf-8').read()
 htmlArticles = []
+mutex = threading.Lock()
 
 
 def getForumList():
@@ -35,7 +36,12 @@ def getForumContent(id, page=1):
 
 def fetchContent(forum_id, results, page):
     try:
+        mutex.acquire()
+        # print(f"Fetching content for forum id {forum_id}, page {page}...")
         content = getForumContent(forum_id, page)
+        # wait 2s
+        time.sleep(2)
+        mutex.release()
         # print(content)
         results[page] = content
     except Exception as e:
@@ -109,4 +115,9 @@ print(f"Total time: {end - start}")
 # 保存为html文件并打开
 with open(currentFileDir + '/result.html', 'w', encoding='utf-8') as f:
     f.write(html)
-webbrowser.open(currentFileDir + '/result.html')
+
+chromePath = r"/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe"
+filename = r'\\\\wsl.localhost\\Ubuntu' + currentFileDir + '/result.html'
+filename = filename.replace('/', '\\\\')
+print(chromePath + ' ' + filename)
+os.system(chromePath + ' ' + filename)
