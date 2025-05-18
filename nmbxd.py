@@ -116,8 +116,5 @@ print(f"Total time: {end - start}")
 with open(currentFileDir + '/result.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-chromePath = r"/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe"
-filename = r'\\\\wsl.localhost\\Ubuntu' + currentFileDir + '/result.html'
-filename = filename.replace('/', '\\\\')
-print(chromePath + ' ' + filename)
-os.system(chromePath + ' ' + filename)
+file_uri = 'file:///' + os.path.abspath(currentFileDir + '/result.html')
+webbrowser.open_new_tab(file_uri)
